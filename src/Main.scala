@@ -5,7 +5,7 @@ object Main {
   import math._
   import LR1._
   /**
-   * the relative error SLAE solutions using standards normCubic (see object MyVector)
+   * the relative error SLAE solutions using norms normCubic (see object MyVector)
   */
   def error(a: Array[Double], b: Array[Double]): Double = {
     val c = MyVector.minus(a, b)

@@ -22,17 +22,20 @@ object MyMatrix{
     }
     def multi(A: Array[Array[Double]], f: Double): Array[Array[Double]] = {
       val n = A.length
+      Counter.countOpsMD+=n*n
       val res = Array.ofDim[Double](n,n)
       for (i <- 0 until n) for (j <- 0 until n) res(i)(j) = A(i)(j)*f
       res
     }
     def multi(A: Array[Array[Double]], b: Array[Double]) : Array[Double] = {
+      Counter.countOpsMD+=A.length*A.length
       val n = A.length
       val c = new Array[Double](n)
       for(i <- 0 until n) c(i) = MyVector.multi(A(i),b)
       c
     }
     def detDiagMatr(A: Array[Array[Double]]): Double = {
+      Counter.countOpsMD+=A.length
       var res = 1.0; for (i <- 0 until A.length) res*=A(i)(i); res 
     }
     /**
@@ -57,8 +60,9 @@ object MyMatrix{
     /**
      * (p-norm, where p = 2)
      */
-    def normSpectr(slae: SLAE): Double = {
-      val maxmin = MyVector.getMaxAndMin(slae.QR.eigenvalues)
+    def normSpectr(eigenvalues: Array[Double]): Double = {
+      Counter.countOpsMD+=1
+      val maxmin = MyVector.getMaxAndMin(eigenvalues)
       sqrt(maxmin._1/maxmin._2)
     }
     def multi(A: Array[Array[Double]], B: Array[Array[Double]]): Array[Array[Double]] = {
@@ -66,7 +70,7 @@ object MyMatrix{
       val C = Array.ofDim[Double](n,n)
       for (i <- 0 until n)
         for (j <- 0 until n)
-          C(i)(j) = {var sum = 0.0; for (k <- 0 until n) sum+=A(i)(k)*B(k)(j); sum}
+          C(i)(j) = MyVector.multi(A(i), B, j)
       C
     }
     def swapColumn(mat: Array[Array[Double]], i1: Int, i2: Int): Unit = {

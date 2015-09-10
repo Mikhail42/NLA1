@@ -4,17 +4,10 @@
 object Main {
   import math._
   import LR1._
-  /**
-   * the relative error SLAE solutions using vector's norm "normCubic" (see object MyVector)
-  */
-  def error(a: Array[Double], b: Array[Double]): Double = {
-    val c = MyVector.minus(a, b)
-    MyVector.normCubic(c)/MyVector.normCubic(a)
-  }
   def input() = MyMatrix.input(scala.io.Source.fromFile("/home/misha/Рабочий стол/matrix").mkString.split('\n'))
   def test(): Array[Array[Double]] = {
     import math._
-    val n = (random*5.0).toInt+2
+    val n = (random*10.0).toInt+3
     val c = ((random+2.0)*100).toInt
     val A = Array.ofDim[Double](n,n)
     for (i <- 0 until n)
@@ -28,19 +21,42 @@ object Main {
       val x = new Array[Double](n)
       for (i <- 0 until n) x(i) = i+1
       val slae = new SLAE(A,x)
+      def xsJoS() = slae.METHOD_ID match{
+        case 1 => slae.JacobiAndSeidel.xsJacobi
+        case 2 => slae.JacobiAndSeidel.xsSeidel
+      }
+      Console.println("Исходная матрица:")
+      Console.println(MyMatrix.toString(A))
       //Устойчивость не гарантирована
       try{     
-        Console.println(MyMatrix.toString(slae.LU_DWP.L))
-        Console.println(MyVector.toString(slae.LU_DWP.xs))
-        Console.println(MyMatrix.toString(slae.QR.Ak))
-        Console.println(MyMatrix.toString(slae.QR.QR_HR._1))
-        Console.println(MyMatrix.toString(slae.QR.QR_HR._2))
-        Console.println(MyVector.toString(slae.QR.xs))
-        Console.println(MyVector.toString(slae.QR.eigenvalues))
+        val out1 = new java.lang.StringBuilder(
+            " Таблица 1. \n 1. Метод ").append(
+            slae.METHOD_ID match{case 1 => "Якоби"; case 2 => "Зейдаля";}).append(
+            "\n 2. Относительная погрешность решения: "+slae.error(x,xsJoS())).append(
+            "\n 3. Число операций: ").append(
+            Counter.countOpsMD)
+        
+        Console.println(out1)
+        Console.println()
       }
       catch {
         case e: Exception => Console.println(e)
-      }     
+      }  
+      try{      
+        val out2 = new java.lang.StringBuilder(
+            " Таблица 2. \n 1. Определитель матрицы системы: ").append(
+            slae.LU_DWP.det).append(
+            "\n 2. Макс. и мин. собственные числа матрицы A (не A*A^T): ").append(
+            {val mm = MyVector.getMaxAndMin(slae.QR.eigenvalues); (mm._1.toString()+" и "+mm._2.toString())}).append(
+            "\n 3. Число обусловленности матрицы системы: ").append(
+            slae.LU.cond)
+        Console.println(out2)
+        Counter.countOpsMD = 0
+        Console.println()
+        Console.println()
+      } catch {
+        case e: Exception => Console.println(e)
+      }  
     }
     run(input())
     run(test())

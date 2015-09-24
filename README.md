@@ -1,5 +1,6 @@
 # NLA
 Numerical Linear Algebra. 
+GNU Affero General Public License
 
 Original: 
 В данной работе реализованы LU-,LUP-,QR- разложения, методы Якоби и Гаусса-Зейделя, метод нахождения решения через LU и LUP разложения. 

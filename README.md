@@ -12,7 +12,7 @@ Additionally, we implemented many matrix operations in the likeness of Matlab.
 The disadvantages of the work is a long time: the eigenvalues ​​on Scilab and Matlab computed much faster. For ill-conditioned matrix 200 * 200 the computation time is about 30-40 seconds, 2-3 seconds against Scilab. Perhaps the use of QR-algorithm with double shifts and more parallel to the calculations have been able to significantly increase the speed. Also, not very successfully implemented counter operations - however, it is well performed its role.
 
 Bibliography:
- * [1] -- "С. Ю. Гоголева, Матрицы и вычисления, 2004
- * [2] -- "В. Б. Андреев, Численные методы"
- * [3] -- "J. E. Roman, The QR Algorithm. http://people.inf.ethz.ch/arbenz/ewp/Lnotes/chapter3.pdf"
- * [4] -- "G. Fasshauer  http://www.math.iit.edu/~fass/477577_Chapter_11.pdf"
+ * [1] -- С. Ю. Гоголева, Матрицы и вычисления, 2004
+ * [2] -- В. Б. Андреев, Численные методы
+ * [3] -- J. E. Roman, The QR Algorithm. http://people.inf.ethz.ch/arbenz/ewp/Lnotes/chapter3.pdf
+ * [4] -- G. Fasshauer  http://www.math.iit.edu/~fass/477577_Chapter_11.pdf

@@ -107,7 +107,6 @@ class QR(A: Array[Array[Double]], b: Array[Double]) {
         val Q = MyMatrix.multi(A, MyMatrix.inverseTriangleUp(curR))
         (Q,curR)
       }
-      val Ak = getAk() 
       /**
        * Basic QR-algorithm
        * [3, p. 52]
@@ -191,8 +190,9 @@ class QR(A: Array[Array[Double]], b: Array[Double]) {
         }
         xs
       }
-      val eigenvalues = {          
-        Counter.countC+=n; Counter.countIA+=n;
+      def eigenvalues = {  
+        val Ak = getAk() 
+        Counter.countC+=n; Counter.countIA+=n+1;
         val diag = new Array[Double](n)
         for (i <- 0 until n) diag(i) = Ak(i)(i)
         diag

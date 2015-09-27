@@ -2,10 +2,10 @@
 Numerical Linear Algebra. 
 LU-decomposition, LUP-decomposition, QR decomposition
 
-GNU Affero General Public License
-
 Original: 
 В данной работе реализованы LU-,LUP-,QR- разложения, методы Якоби и Гаусса-Зейделя, методы нахождения решения СЛАУ через LU и LUP разложения, нахождения собственных чисел через QR-разложения. 
+
+License: GNU Affero General Public License
 
 Bibliography:
  * [1] -- С. Ю. Гоголева, Матрицы и вычисления, 2004

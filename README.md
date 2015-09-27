@@ -1,5 +1,6 @@
 # NLA
 Numerical Linear Algebra. 
+LU-decomposition, LUP-decomposition, QR decomposition
 
 GNU Affero General Public License
 

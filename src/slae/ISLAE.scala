@@ -71,7 +71,8 @@ object ISLAE {
         for (j <- k until n) U(k)(j) = matr(k)(j) - MyVector.multi(L(k),U,j,0,k);
         if (dwpFlag){
           // индекс элемента с наибольшим модулем
-          val ind = MyVector.indexOfMaxAbs(U(k),k)
+          val ind = MyVector.indexOfMaxAbs(matr(k),k) // val ind = MyVector.indexOfMaxAbs(U(k),k)
+          //val ind = MyVector.indexOfMaxAbs(U(k),k)
           MyMatrix.swapColumn(matr,k,ind); MyMatrix.swapColumn(U,k,ind); 
           Counter.countC+=1;
           if (k!=ind) {Counter.countIA+=3; val g = q(k); q(k)=q(ind); q(ind) = g;}
